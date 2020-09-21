@@ -2,7 +2,7 @@
   <div>
     <tree-menu
       v-if="tree"
-      :label="tree.label"
+      :node="tree.node"
       :nodes="tree.nodes"
       :depth="0"
     ></tree-menu>

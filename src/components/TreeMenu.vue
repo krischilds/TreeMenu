@@ -8,16 +8,28 @@
           :class="iconClasses"
           style="padding-right:10px"
         ></i>
-        <span v-if="nodes">{{ label }}</span>
-        <a href="#" v-else style="border:0">{{ label }}</a>
+        <span v-if="nodes">{{ node.value }} {{ node.type }}</span>
+        <div v-else>
+          <span v-if="node.type === 'label'">
+            <a href="#">{{ node.value }}</a> {{ node.type }}
+          </span>
+          <span v-if="node.type === 'dropdown'">
+            <span style="color:red">{{ node.value }}</span>
+            <select>
+              <option v-for="x in node.options" :value="x" :key="x">{{
+                x
+              }}</option>
+            </select>
+          </span>
+        </div>
       </div>
     </div>
     <div v-if="showChildren">
       <tree-menu
-        :key="node.label"
+        :key="node"
         v-for="node in nodes"
         :nodes="node.nodes"
-        :label="node.label"
+        :node="node.node"
         :depth="depth + 1"
       >
       </tree-menu>
@@ -26,7 +38,7 @@
 </template>
 <script>
 export default {
-  props: ["label", "nodes", "depth", "special"],
+  props: ["node", "nodes", "depth", "special"],
   name: "tree-menu",
   data() {
     return { showChildren: false };

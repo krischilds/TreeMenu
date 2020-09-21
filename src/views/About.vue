@@ -24,6 +24,11 @@ import TreeMenuRoot from "../components/TreeMenuRoot.vue";
 
 export default {
   components: { "tree-menu-root": TreeMenuRoot },
+  methods: {
+    selectTree() {
+      console.log("selectTree");
+    }
+  },
   data() {
     return {
       tree: {},
@@ -43,83 +48,78 @@ export default {
   },
   created() {
     const t1 = {
-      label: "Tree 1 Root",
+      node: { type: "label", value: "Pesticides" },
       nodes: [
         {
-          label: "Module 1",
+          node: { type: "label", value: "Label 1" }
+        },
+        {
+          node: { type: "label", value: "Label 2 PARENT" },
           nodes: [
             {
-              label: "item1.1"
+              node: { type: "label", value: "Label 1.2" }
             },
             {
-              label: "item1.2",
+              node: { type: "label", value: "Label 1.2" }
+            },
+            {
+              node: {
+                type: "dropdown",
+                value: "Label Leaf Speacial",
+                options: ["A1", "B2", "C3"]
+              }
+            },
+            {
+              node: {
+                type: "dropdown",
+                value: "Label B",
+                options: ["A1", "B2", "C3"]
+              },
               nodes: [
                 {
-                  label: "item1.2.1"
+                  node: { type: "label", value: "Label X" }
                 }
               ]
             }
           ]
-        },
-        {
-          label: "item2"
         }
       ]
     };
+
     const t2 = {
-      label: "Tree 2 Root",
+      node: { type: "label", value: "Label 2: Vet Drugs" },
       nodes: [
         {
-          node: { type: "like", label: "Super Node 2" },
-          label: "Module 2",
+          node: { type: "label", value: "Label 2.1" },
           nodes: [
             {
-              label: "item2.1"
+              node: { type: "label", value: "Label 2.2A" }
             },
             {
-              label: "item2.2",
+              node: { type: "label", value: "Label 2.2B" }
+            },
+            {
+              node: { type: "label", value: "Label 2.2C" }
+            },
+            {
+              node: { type: "label", value: "Label 2.3" },
               nodes: [
                 {
-                  label: "item2.2.1"
+                  node: { type: "label", value: "Label 2.4" }
                 }
               ]
             }
           ]
         },
         {
-          label: "item2"
-        }
-      ]
-    };
-    const t3 = {
-      label: "Tree 3 Root",
-      nodes: [
-        {
-          node: { type: "link", label: "Super Node 3" },
-          label: "Module 3",
-          nodes: [
-            {
-              label: "item3.1"
-            },
-            {
-              label: "item3.2",
-              nodes: [
-                {
-                  label: "item3.2.1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          label: "item3"
+          node: { type: "label", value: "Label 2.5" }
         }
       ]
     };
     let treeMap = {};
     treeMap.A = t1;
     treeMap.B = t2;
-    treeMap.C = t3;
+    // treeMap.C = t3;
 
     this.treeMap = treeMap;
     this.tree = this.treeMap[this.selected];
