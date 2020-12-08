@@ -1,6 +1,6 @@
 <template>
   <section style="boder:1px solid gray" class="p-5 m-5">
-    <div>Create Note</div>
+    <slot name="header"></slot>
 
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-textarea

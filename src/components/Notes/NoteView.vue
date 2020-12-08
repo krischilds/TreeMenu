@@ -1,5 +1,6 @@
 <template>
   <div>
+    <slot></slot>
     <div>{{ $route.params.id }}</div>
     <div>View Note {{ id }}</div>
   </div>
@@ -8,7 +9,7 @@
 <script>
 export default {
   name: "NoteView",
-  props: ["id"]
+  props: ["id"],
 };
 </script>
 

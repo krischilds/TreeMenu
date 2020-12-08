@@ -4,7 +4,6 @@
     <div>
       <h5>Note Page</h5>
       <pre>{{ formData }}</pre>
-
       <div>USERNAME: {{ getUsername }}</div>
     </div>
   </div>
@@ -14,23 +13,23 @@
 export default {
   name: "Note",
   props: {
-    form: Object
+    form: Object,
   },
   data() {
     return {
-      formData: {}
+      formData: {},
     };
   },
   computed: {
     getUsername() {
       return this.$store.getters.getUsername;
       //this.$store.commit("saveUsername", this.noteText);
-    }
+    },
   },
   methods: {},
   mounted() {
     this.formData = this.$route.params.form;
-  }
+  },
 };
 </script>
 
