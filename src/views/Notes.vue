@@ -3,6 +3,9 @@
     <div>
       <note-create>
         <h4 slot="header">Create Note</h4>
+        <div slot="button">
+          <b-button type="submit">Save</b-button>
+        </div>
       </note-create>
     </div>
     <div>Notes: TODO: Show all notes</div>

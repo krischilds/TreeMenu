@@ -11,16 +11,16 @@
 </template>
 
 <script>
-import TreeMenu from "../components/TreeMenu.vue";
+import TreeMenu from "./TreeMenu.vue";
 
 export default {
   components: { "tree-menu": TreeMenu },
   name: "tree-menu-root",
   props: {
     tree: {
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
 };
 </script>
 

@@ -20,14 +20,14 @@
 </template>
 
 <script>
-import TreeMenuRoot from "../components/TreeMenuRoot.vue";
+import TreeMenuRoot from "../components/TreeMenu/TreeMenuRoot.vue";
 
 export default {
   components: { "tree-menu-root": TreeMenuRoot },
   methods: {
     selectTree() {
       console.log("selectTree");
-    }
+    },
   },
   data() {
     return {
@@ -37,53 +37,53 @@ export default {
       options: [
         { text: "Pesticides", value: "A" },
         { text: "Vet Drugs", value: "B" },
-        { text: "Resource Center", value: "C" }
-      ]
+        { text: "Resource Center", value: "C" },
+      ],
     };
   },
   watch: {
-    selected: function(val) {
+    selected: function (val) {
       this.tree = this.treeMap[val];
-    }
+    },
   },
   created() {
     const t1 = {
       node: { type: "label", value: "Pesticides" },
       nodes: [
         {
-          node: { type: "label", value: "Label 1" }
+          node: { type: "label", value: "Label 1" },
         },
         {
           node: { type: "label", value: "Label 2 PARENT" },
           nodes: [
             {
-              node: { type: "label", value: "Label 1.2" }
+              node: { type: "label", value: "Label 1.2" },
             },
             {
-              node: { type: "label", value: "Label 1.2" }
+              node: { type: "label", value: "Label 1.2" },
             },
             {
               node: {
                 type: "dropdown",
                 value: "Label Leaf Speacial",
-                options: ["A1", "B2", "C3"]
-              }
+                options: ["A1", "B2", "C3"],
+              },
             },
             {
               node: {
                 type: "dropdown",
                 value: "Label B",
-                options: ["A1", "B2", "C3"]
+                options: ["A1", "B2", "C3"],
               },
               nodes: [
                 {
-                  node: { type: "label", value: "Label X" }
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  node: { type: "label", value: "Label X" },
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const t2 = {
@@ -93,28 +93,28 @@ export default {
           node: { type: "label", value: "Label 2.1" },
           nodes: [
             {
-              node: { type: "label", value: "Label 2.2A" }
+              node: { type: "label", value: "Label 2.2A" },
             },
             {
-              node: { type: "label", value: "Label 2.2B" }
+              node: { type: "label", value: "Label 2.2B" },
             },
             {
-              node: { type: "label", value: "Label 2.2C" }
+              node: { type: "label", value: "Label 2.2C" },
             },
             {
               node: { type: "label", value: "Label 2.3" },
               nodes: [
                 {
-                  node: { type: "label", value: "Label 2.4" }
-                }
-              ]
-            }
-          ]
+                  node: { type: "label", value: "Label 2.4" },
+                },
+              ],
+            },
+          ],
         },
         {
-          node: { type: "label", value: "Label 2.5" }
-        }
-      ]
+          node: { type: "label", value: "Label 2.5" },
+        },
+      ],
     };
     let treeMap = {};
     treeMap.A = t1;
@@ -123,7 +123,7 @@ export default {
 
     this.treeMap = treeMap;
     this.tree = this.treeMap[this.selected];
-  }
+  },
 };
 </script>
 

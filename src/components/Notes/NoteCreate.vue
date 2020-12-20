@@ -1,5 +1,5 @@
 <template>
-  <section style="boder:1px solid gray" class="p-5 m-5">
+  <section style="boder: 1px solid gray" class="p-5 m-5">
     <slot name="header"></slot>
 
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
@@ -32,7 +32,7 @@
           Form is not complete
         </b-alert>
       </div>
-      <b-button type="submit">Submit</b-button>
+      <slot name="button"></slot>
     </b-form>
   </section>
 </template>
@@ -51,22 +51,22 @@ export default {
         noteText: "",
         noteTitle: "",
         checked: [],
-        valid: false
+        valid: false,
       },
-      status: "not_accepted"
+      status: "not_accepted",
     };
   },
   computed: {
-    isFormComplete: function() {
+    isFormComplete: function () {
       const isComplete =
         this.form.noteText &&
         this.form.noteText.length > 0 &&
         this.status === "accepted";
       return isComplete;
-    }
+    },
   },
   methods: {
-    createNote: function() {
+    createNote: function () {
       console.log("createNote");
     },
     validate() {
@@ -86,7 +86,7 @@ export default {
         this.$store.commit("saveUsername", this.form.noteText);
         const formData = JSON.stringify(this.form);
         console.log(formData);
-        router.push({ name: "ViewNote", params: { form: formData } }); // -> /user/123
+        // router.push({ name: "ViewNote", params: { form: formData } }); // -> /user/123
       }
     },
     onReset(evt) {
@@ -100,11 +100,11 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
-    }
+    },
   },
   mounted() {
     console.log(this);
-  }
+  },
 };
 </script>
 
