@@ -1,20 +1,64 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from 'axios';
 
 Vue.use(Vuex);
+
+function loadGames() {
+  return [
+    {
+      id: 1,
+      name: "DOS2",
+      date: "2020-12-21",
+      rating: 10,
+      abbr: "item1"
+    },
+    {
+      id: 2,
+      name: "Fall Guys",
+      date: "2020-12-21",
+      rating: 9,
+      abbr: "item2"
+    },
+    {
+      id: 3,
+      name: "Cuphead",
+      date: "2020-12-21",
+      rating: 7,
+      abbr: "item3"
+    },
+    {
+      id: 4,
+      name: "Chaosbane",
+      date: "2020-12-21",
+      rating: 7,
+      abbr: "item4"
+    },
+    {
+      name: "Defense Grid",
+      date: "2020-12-21",
+      rating: 8,
+      abbr: "item5"
+    }
+  ]
+}
 
 export default new Vuex.Store({
   state: {
     count: 0,
     form: {},
-    username: ""
+    username: "",
+    games: loadGames(),
+    tattoos: null
   },
   mutations: {
     increment: state => state.count++,
     decrement: state => state.count--,
     saveForm: (state, form) => (state.form = form),
-    saveNote: (state, note) => (state.form.note = note),
-    saveUsername: (state, username) => (state.username = username)
+    saveUsername: (state, username) => (state.username = username),
+    SET_TATTOOS(state, tattoos) {
+      state.tattoos = tattoos
+    }
   },
   getters: {
     getNote(state) {
@@ -25,7 +69,23 @@ export default new Vuex.Store({
     },
     getUsername(state) {
       return state.username;
+    },
+    getGames(state) {
+      return state.games
+    },
+    getTattoos(state) {
+      return state.tattoos
     }
   },
-  actions: {}
-});
+
+  actions: {
+
+    getTattoos({ commit }) {
+      axios.get('http://localhost:3000/tattoos')
+        .then(response => {
+          commit('SET_TATTOOS', response.data)
+        })
+    }
+
+  }
+})
