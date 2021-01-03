@@ -53,11 +53,13 @@ export default new Vuex.Store({
   },
   mutations: {
     increment: state => state.count++,
-    decrement: state => state.count--,
-    
-    SET_TATTOOS(state, tattoos) {
+    decrement: state => state.count--,    
+    setTattoos(state, tattoos) {
       state.tattoos = tattoos
-    }
+    },
+    saveUsername(state, value) {
+      state.username = value;
+    },
   },
   getters: {
     getNote(state) {
@@ -82,7 +84,7 @@ export default new Vuex.Store({
     getTattoos({ commit }) {
       axios.get('http://localhost:3000/tattoos')
         .then(response => {
-          commit('SET_TATTOOS', response.data)
+          commit('setTattoos', response.data)
         })
     }
 

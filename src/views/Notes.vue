@@ -12,6 +12,7 @@
         <h4 slot="header">Create Comment</h4>
       </note-form>
     </div>
+    
     <div>Notes: TODO: Show all notes</div>
     <div>
       {{ getUsername }}

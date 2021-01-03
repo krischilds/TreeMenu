@@ -1,29 +1,66 @@
 <template>
-  <section style="boder: 1px solid gray" class="p-5 m-5">
+  <section class="p-5 m-5 note-form">
     <slot name="header"></slot>
 
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" @reset="onReset" v-if="form.isVisible">
+
+    <div role="group">
+        <label for="input-live">Name:</label>
+        <!-- This is a form text block (formerly known as help block) -->
+        <b-form-text style="margin-top:2px;margin-bottom:2px;" id="input-live-help"><b-icon icon="info-circle" scale="1.5" variant="secondary" style="margin-right: 4px"></b-icon> <i>User's name.</i></b-form-text>
+
+        <b-form-input
+          id="input-live"
+          v-model="form.name"
+          :state="nameState"
+          aria-describedby="input-live-help input-live-feedback"
+          placeholder="Enter your name"
+          trim
+        ></b-form-input>
+
+        <!-- This will only be shown if the preceding input has an invalid state -->
+        <b-form-invalid-feedback id="input-live-feedback">
+          Enter at least 3 letters
+        </b-form-invalid-feedback>
+
+      </div>
+
       <b-form-textarea
+        class="form-control"
         v-model="form.noteText"
         debounce="500"
         rows="3"
         max-rows="5"
+        :state="isNoteTextValid"
       ></b-form-textarea>
+      <div class="error-message" v-if="!isNoteTextValid">The note text is invalid.</div>
       <div class="mt-2 mb-0">{{ form.noteText }}</div>
 
+      <b-form-input
+        class="form-control"
+        v-model.number="form.rating"
+        :state="form.rating > 0 && form.rating <= 10"
+        required
+      ></b-form-input>
+
       <b-form-checkbox
-        id="checkbox-1"
-        v-model="status"
-        name="checkbox-1"
-        value="accepted"
+        v-model="form.accepted"
+        value="accepted"        
         unchecked-value="not_accepted"
+        class="form-control"
+        name="form-accepted"
+        :state="form.accepted === 'accepted'"
       >
         I accept the terms and use
       </b-form-checkbox>
 
       <div>
-        State: <strong>{{ status }}</strong>
+        Accepted: <strong>{{ form.accepted }}</strong>
       </div>
+      <div>
+        Form Valid: <strong>{{ form.valid }}</strong>
+      </div>
+
       <div v-if="hasSubmittedForm">
         <b-alert v-if="isFormComplete" :show="isFormComplete" variant="success">
           Form is complete
@@ -46,22 +83,30 @@ export default {
   data() {
     return {
       hasSubmittedForm: false,
-      show: true,
-      form: {
+      form: {          
+        name: '',
+        hasSubmitted: false,   
+        isVisible: true,
         noteText: "",
         noteTitle: "",
-        checked: [],
+        rating: 0,
+        accepted: false,
         valid: false,
-      },
-      status: "not_accepted",
+      }
     };
   },
   computed: {
+    nameState() {
+      return this.form.name.length > 2 ? true : false;
+    },
+    isNoteTextValid: function () {
+      return this.form.noteText.length >= 10;
+    },
     isFormComplete: function () {
       const isComplete =
         this.form.noteText &&
         this.form.noteText.length > 0 &&
-        this.status === "accepted";
+        this.form.accepted === "accepted"
       return isComplete;
     },
   },
@@ -93,12 +138,13 @@ export default {
       evt.preventDefault();
       // Reset our form values
       this.form.noteText = "";
-      this.form.noteTitle = "";
-      this.form.checked = [];
+      this.form.noteTitle = "";      
+      this.form.accepted = "not_accepted";
+
       // Trick to reset/clear native browser form validation state
-      this.show = false;
+      this.form.isVisible = false;
       this.$nextTick(() => {
-        this.show = true;
+        this.form.isVisible = true;
       });
     },
   },
@@ -108,4 +154,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.note-form {
+  background-color: whitesmoke;
+  border: 4px solid rgb(207, 207, 207);
+  border-radius: 2px;
+}
+</style>
