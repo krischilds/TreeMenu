@@ -54,8 +54,7 @@ export default new Vuex.Store({
   mutations: {
     increment: state => state.count++,
     decrement: state => state.count--,
-    saveForm: (state, form) => (state.form = form),
-    saveUsername: (state, username) => (state.username = username),
+    
     SET_TATTOOS(state, tattoos) {
       state.tattoos = tattoos
     }

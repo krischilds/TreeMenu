@@ -1,0 +1,49 @@
+{
+  "tattoos": [
+    {
+      "id": 1,
+      "abbr": "item1",
+      "image": "/images/a.jpg",
+      "date": "12-24-2020",
+      "rating": 9,
+      "name": "soccer ball",
+      "description": "bw soccer ball breaking through the net."
+    },
+    {
+      "id": 2,
+      "abbr": "item2",
+      "image": "/images/b.jpg",
+      "date": "12-24-2020",
+      "rating": 8,
+      "name": "vampire",
+      "description": "vampire with red lips"
+    },
+    {
+      "id": 3,
+      "abbr": "item3",
+      "image": "/images/c.jpg",
+      "date": "12-24-2020",
+      "rating": 8,
+      "name": "owl",
+      "description": "bw owl with yellow eyes"
+    },
+    {
+      "id": 4,
+      "abbr": "item4",
+      "image": "/images/d.jpg",
+      "date": "12-20-2020",
+      "rating": 9,
+      "name": "car",
+      "description": "shelby mustang"
+    },
+    {
+      "id": 5,
+      "abbr": "item5",
+      "image": "/images/e.jpg",
+      "date": "12-20-2021",
+      "rating": 7,
+      "name": "tribal",
+      "description": "tribal tattoo on bicep"
+    }
+  ]
+}

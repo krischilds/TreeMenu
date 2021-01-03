@@ -32,7 +32,7 @@
           Form is not complete
         </b-alert>
       </div>
-      <slot name="button"></slot>
+      <slot name="button"><b-button type="submit">Submit</b-button></slot>
     </b-form>
   </section>
 </template>
@@ -41,7 +41,7 @@
 import router from "../../router";
 
 export default {
-  name: "NoteCreate",
+  name: "NoteForm",
   props: [],
   data() {
     return {
